@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApplication5.Models.Teacher>
+@{
+	int idNo = 1;
+}
+
+
+<h1 class="fw-bold text-center">Teacher Table View</h1>
+
+<a asp-controller="Teacher" asp-action="CreateOrEdit" class="btn btn-success m-3">Add Teacher</a>
+
+<div class="container">
+    <table class="table table-success table-striped">
+        <thead>
+            <tr class="text-center">
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@idNo</td>
+                    <td>@item.Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Address</td>
+                    <td>@item.Salary</td>
+                    <td>
+                        <a asp-action="CreateOrEdit" asp-controller="Teacher" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                        <a asp-action="Delete" asp-controller="Teacher" onclick="return confirm('ARE YOU SURE TO DELETE THIS ITEM??')" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        <a asp-action="Details" asp-controller="Teacher" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                    </td>
+                </tr>
+                idNo++;
+            }
+        </tbody>
+    </table>
+</div>
